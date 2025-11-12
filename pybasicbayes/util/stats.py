@@ -8,8 +8,7 @@ import scipy.stats as stats
 import scipy.special as special
 import scipy.linalg
 from scipy.special import logsumexp
-from numpy.core.umath_tests import inner1d
-
+from pybasicbayes.util.deprecated import inner1d
 from .general import any_none, blockarray
 
 ### data abstraction
@@ -121,7 +120,7 @@ def sample_gaussian(mu=None,Sigma=None,J=None,h=None):
         return scipy.linalg.solve_triangular(L,x,lower=True,trans='T') \
             + dpotrs(L,h,lower=True)[0]
 
-def sample_truncated_gaussian(mu=0, sigma=1, lb=-np.Inf, ub=np.Inf):
+def sample_truncated_gaussian(mu=0, sigma=1, lb=-np.inf, ub=np.inf):
     """
     Sample a truncated normal with the specified params. This
     is not the most stable way but it works as long as the

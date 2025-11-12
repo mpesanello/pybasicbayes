@@ -11,7 +11,7 @@ __all__ = \
 
 import numpy as np
 from numpy import newaxis as na
-from numpy.core.umath_tests import inner1d
+
 import scipy.linalg
 import scipy.stats as stats
 import scipy.special as special
@@ -25,6 +25,7 @@ from pybasicbayes.util.stats import sample_niw, invwishart_entropy, \
     getdatasize, flattendata, getdatadimension, \
     combinedata, multivariate_t_loglik, gi, niw_expectedstats
 
+from pybasicbayes.util.deprecated import inner1d
 weps = 1e-12
 
 
@@ -362,7 +363,7 @@ class Gaussian(
 
             # see Eqs. 10.64, 10.67, and 10.71 in Bishop
             return self._loglmbdatilde()/2 - D/(2*kappa_n) - nu_n/2 * \
-                inner1d(xs.T,xs.T) - D/2*np.log(2*np.pi)
+                np.sum(xs.T * xs.T, axis=1) - D/2*np.log(2*np.pi)
         else:
             D = self.mu_mf.shape[0]
 

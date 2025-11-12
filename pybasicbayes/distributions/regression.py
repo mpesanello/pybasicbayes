@@ -88,7 +88,7 @@ class Regression(GibbsSampling, MeanField, MaxLikelihood):
         B = M.dot(Kinv)
         C = Kinv
         d = nu
-        return np.array([A,B,C,d])
+        return np.array([A,B,C,d], dtype=object)
 
     @staticmethod
     def _natural_to_standard(natparam):
@@ -136,7 +136,7 @@ class Regression(GibbsSampling, MeanField, MaxLikelihood):
                 xxT = blockarray([[xxT,x[:,na]],[x[na,:],np.atleast_2d(n)]])
                 yxT = np.hstack((yxT,y[:,na]))
 
-            return np.array([yyT, yxT, xxT, n])
+            return np.array([yyT, yxT, xxT, n], dtype=object)
         else:
             # data passed in like np.hstack((x, y))
             data = data[~np.isnan(data).any(1)]
@@ -198,7 +198,7 @@ class Regression(GibbsSampling, MeanField, MaxLikelihood):
         D_in, D_out = self.D_in, self.D_out
         return np.array(
             [np.zeros((D_out,D_out)), np.zeros((D_out,D_in)),
-             np.zeros((D_in,D_in)),0])
+             np.zeros((D_in,D_in)),0], dtype=object)
 
     @staticmethod
     def _stats_ensure_array(stats):

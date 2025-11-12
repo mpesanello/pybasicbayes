@@ -1,3 +1,6 @@
 *.pyc
 *.pyo
 /tags
+*.egg-info/*
+*.eggs*
+build/*
